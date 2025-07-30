@@ -1,4 +1,5 @@
 def call(String configFile) {
+    node {
     def conf = evaluate(readTrusted('config/prod.groovy'))
 
     stage("Clone Repo") {
@@ -21,4 +22,5 @@ def call(String configFile) {
     stage("Send Slack Notification") {
         notifySlack(conf.SLACK_CHANNEL_NAME, conf.ACTION_MESSAGE)
     }
+}          
 }
