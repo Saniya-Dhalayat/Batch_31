@@ -1,5 +1,5 @@
 def call(String configFile) {
-    def conf = loadConfig(config/prod.groovy)
+    def conf = loadConfig('config/prod.groovy')
 
     stage("Clone Repo") {
         git url: 'https://github.com/Saniya-Dhalayat/Batch_31.git'
