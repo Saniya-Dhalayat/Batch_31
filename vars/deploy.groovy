@@ -21,7 +21,7 @@ def call(String configFile) {
 
     stage("Send Slack Notification") {
         //notifySlack(conf.SLACK_CHANNEL_NAME, conf.ACTION_MESSAGE)
-        slackSend channel: 'jenkins-notification',
+        slackSend channel: '#jenkins-notification',
         message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}"
     }
 }          
