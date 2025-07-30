@@ -29,6 +29,9 @@ def call(String configFile) {
                     --data '${payload}' "${SLACK_WEBHOOK_URL}"
                 """
     }
+       stage('Artifacts') {
+        archiveArtifacts artifacts: '\'**/*.jar\'', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
+       }
 }          
 }
 }
