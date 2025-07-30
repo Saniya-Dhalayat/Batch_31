@@ -1,5 +1,5 @@
 def call(String configFile) {
-    def conf = loadConfig(configFile)
+    def conf = evaluate(readTrusted(configFilePath))
 
     stage("Clone Repo") {
         git url: 'https://github.com/Saniya-Dhalayat/Batch_31.git'
