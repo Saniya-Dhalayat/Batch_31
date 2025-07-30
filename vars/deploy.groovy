@@ -21,8 +21,13 @@ def call(String configFile) {
 
     stage("Send Slack Notification") {
         //notifySlack(conf.SLACK_CHANNEL_NAME, conf.ACTION_MESSAGE)
-        slackSend channel: '#jenkins-notification',
-        message: "Find Status of Pipeline:- ${currentBuild.currentResult} ${env.JOB_NAME} ${env.BUILD_NUMBER} ${BUILD_URL}"
+        withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_WEBHOOK_URL')]) {
+                def message = "Deployment to *${conf.ENVIRONMENT}* completed: ${conf.ACTION_MESSAGE}"
+                def payload = """{"text": "${message}"}"""
+                sh """
+                    curl -X POST -H 'Content-type: application/json' \
+                    --data '${payload}' "${SLACK_WEBHOOK_URL}"
+                """
     }
 }          
 }
