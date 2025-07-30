@@ -15,7 +15,7 @@ def call(String configFile) {
     stage("Run Ansible Playbook") {
         sh """
             cd ${conf.CODE_BASE_PATH}
-            ansible-playbook env/prod/Assignment5/site.yml -i env/prod/Assignment5/inventory.ini --extra-vars "env=${conf.ENVIRONMENT}"
+            ansible-playbook Assignment5/site.yml -i Assignment5/inventory.ini --extra-vars "env=${conf.ENVIRONMENT}"
         """
     }
 
