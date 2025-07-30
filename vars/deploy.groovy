@@ -3,7 +3,7 @@ def call(String configFile) {
     def conf = evaluate(readTrusted('config/prod.groovy'))
 
     stage("Clone Repo") {
-        git url: 'https://github.com/Saniya-Dhalayat/Batch_31.git'
+        git branch: 'main', url: 'https://github.com/Saniya-Dhalayat/Batch_31.git'
     }
 
     if (conf.KEEP_APPROVAL_STAGE.toBoolean()) {
