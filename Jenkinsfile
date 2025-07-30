@@ -1,3 +1,3 @@
 @Library('shared-ansible-lib') _
 
-deploy('shared-ansible-lib/config/prod.groovy')
+deploy('config/prod.groovy')
