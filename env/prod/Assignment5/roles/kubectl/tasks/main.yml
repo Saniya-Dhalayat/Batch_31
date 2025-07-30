@@ -1,0 +1,13 @@
+---
+- name: Download kubectl binary
+  get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: /tmp/kubectl
+    mode: '0755'
+
+- name: Install kubectl
+  copy:
+    src: /tmp/kubectl
+    dest: "{{ kubectl_path }}"
+    remote_src: yes
+    mode: '0755'

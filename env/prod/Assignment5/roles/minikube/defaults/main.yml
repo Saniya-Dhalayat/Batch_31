@@ -1,0 +1,5 @@
+---
+minikube_version: "v1.33.1"
+minikube_path: "/usr/local/bin/minikube"
+minikube_service_path: "/etc/systemd/system/minikube.service"
+driver: "none"

@@ -1,0 +1,8 @@
+---
+- name: Install Minikube using Ansible role
+  hosts: ubuntu
+  become: true
+  roles:
+    - docker
+    - kubectl
+    - minikube

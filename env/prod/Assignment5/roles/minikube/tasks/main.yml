@@ -1,0 +1,37 @@
+---
+- name: Include OS-specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family | lower }}.yml"
+    - "default.yml"
+
+- name: Install dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ os_packages }}"
+
+- name: Download Minikube binary
+  get_url:
+    url: "https://storage.googleapis.com/minikube/releases/{{ minikube_version }}/minikube-linux-amd64"
+    dest: /tmp/minikube
+    mode: '0755'
+
+- name: Install Minikube
+  copy:
+    src: /tmp/minikube
+    dest: "{{ minikube_path }}"
+    remote_src: yes
+    mode: '0755'
+
+- name: WSL Info - Skipping systemd service
+  debug:
+    msg: "Systemd not supported in WSL. Skipping systemd service setup."
+  when: ansible_virtualization_type == 'wsl'
+
+- name: Create Minikube systemd service
+  template:
+    src: minikube.service.j2
+    dest: "{{ minikube_service_path }}"
+  notify: Restart Minikube
+  when: ansible_virtualization_type != 'wsl'
