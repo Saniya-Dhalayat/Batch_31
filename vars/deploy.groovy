@@ -28,10 +28,7 @@ def call(String configFile) {
                     curl -X POST -H 'Content-type: application/json' \
                     --data '${payload}' "${SLACK_WEBHOOK_URL}"
                 """
-    }
-       stage('Artifacts') {
-        archiveArtifacts artifacts: '\'**/*.jar\'', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
-       }
+    }     
 }          
 }
 }
