@@ -1,3 +1,11 @@
-@Library('shared-ansible-lib') _
-
-deploy('config/prod.groovy')
+@Library('mysharedlib') _
+pipeline {
+  agent any
+  stages {
+    stage('Hello') {
+      steps {
+        helloWorld()
+      }
+    }
+  }
+}
